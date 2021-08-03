@@ -1,3 +1,29 @@
 body {
-    background-color: aquamarine;
+    background-color:lightgray;
 }
+.headerStyles {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    background-color: white;
+    padding: 20px; 
+}
+.headerStyles div {
+    border: 1px #ccc solid;
+    padding:20px;
+    justify-content: center;
+    margin-bottom: 20px;
+    
+}
+
+
+
+
+
+
+
+
+
+/* body {
+    background-color: black;
+} */
