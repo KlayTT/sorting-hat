@@ -24,18 +24,20 @@ const house = [
 
 },
 ];
+const randomHouse = house[Math.floor(Math.random() * house.length)];
+
+
 
 const student = [
 {
     id: 1,
-    studentName: "Carl Wheezer",
-    houseId: 1,
+    name: "Carl Wheezer",
+    house: randomHouse.hName,
     expelled: false,
     
 },
 ];
 
-const randomHouse = house[Math.floor(math.random() * house.length)];
 
 const renderToDom = (divId, textToPrint) => {
     const selectedDiv = document.querySelector(divId);
@@ -44,11 +46,14 @@ const renderToDom = (divId, textToPrint) => {
 
 const cards = () => {
     const domString = `
-    <div class="headerCard" style="width: 80rem;">
-        <div class="card-body">
-            <h5 class="card-title">Welcome to Harry P world</h5>
-        <p class="card-text">Never read Harry P I hope this house organizer finds you well.</p>
-    <a href="#" class="btn btn-primary">Sort Me!</a>
+    <div class="card" style="width:80rem">
+  <div class="card-header">
+    Welcome to Harry P world
+  </div>
+  <div class="card-body">
+    <p class="card-text">Never read Harry P I hope this house organizer finds you well.</p>
+    <button type="button" onclick="houseForm()" class="btn btn-primary">Let's Start Sorting</button>
+    <p class="card-text">Enter your name below and begin the wicked house adventure!</p>
   </div>
 </div>
     `;
@@ -57,21 +62,25 @@ const cards = () => {
 };
 
 const houseForm = () => {
-    domString = `
-    <div class="mb-3">
+    const domString = `
+    <div class="mb-3"> 
         <label for="formHeader" class="form-label">Enter First Year's Name</label>
             <input type="text" class="form-control" id="studentName" placeholder="Student Name">
-        <button type="button" class="btn btn-primary">Submit</button>
+        <button type="button" id="formButton" class="btn btn-primary">Submit</button>
     </div>
-    `
+    `;
+
+    renderToDom("#houseForm" ,domString);
+    const form = document.querySelector("#formButton");
+    form.addEventListener("click", handleFormSubmit);
 };
 
 const handleFormSubmit = (event) => {
     event.preventDefault();
-
     const newStudent = {
-        studentName: document.querySelector("#studentName").value,
-        houseId: randomHouse(),
+        name: document.querySelector("#studentName").value,
+        house: randomHouse.hName,
+        expelled: false,
       };
       student.push(newStudent);
       studentBuilder(student);
@@ -86,11 +95,65 @@ const expelStudent = (event) => {
     if(targetType === "button"){
       student.splice(targetId, 1);
       studentBuilder(student);
-    };
+    }; 
 };
 
+ const studentBuilder = (array) => {
+    let domString = "";
+    array.forEach((object, i) => {
+      domString += `
+      <div class="card" style="width: 20rem;">
+        <div class="card-body">
+          <h5 class="card-title">${object.name}</h5>
+          <p class="card-text">${object.house}</p>
+            </div>
+          <button type="button" id=${i} class="btn btn-primary">Delete</button>
+        </div>
+      </div>
+      `
+    });
+    
+  
+    renderToDom("#studentCard", domString);
+
+};
+  /* const expelledStudentBuilder = (piesArray) => {
+    let domString = "";
+    piesArray.forEach((pie, i) => {
+      domString += `
+      <div class="card" style="width: 100rem;">
+        <img src="${pie.imageUrl}" class="card-img-top" alt="${pie.name}">
+        <div class="card-body">
+          <h5 class="card-title">${pie.name}</h5>
+          <p class="card-text">${pie.ingredients}</p>
+          <button type="button" id=${i} class="btn btn-primary">Delete</button>
+        </div>
+      </div>
+      `;
+    });
+  
+    renderToDom("#expelledCard", domString);
+  }; */
 
 
+
+/* const toggleForm = () => {
+    const form = document.getElementById("formButton");
+    if (form.style.display === "none") {
+    } else {
+        form.style.display = "mb-3";
+    }
+};  */
+/* const handleFormSubmit = (event) => {
+    event.preventDefault();
+};
+ */
+
+
+/* const buttonEvents = () => {
+    document.querySelector("#headerCard");
+    document.addEventListener("click", handleButtonClick);
+}; */
 
 
 
@@ -98,6 +161,18 @@ const expelStudent = (event) => {
 
 const init = () => {
     cards();
+    /* toggleForm(); */
+    /* houseForm(); */
 };
 
 init();
+
+
+
+/* <div class="headerCard" style="width: 80rem;">
+        <div class="card-body">
+            <h5 class="card-title">Welcome to Harry P world</h5>
+        <p class="card-text">Never read Harry P I hope this house organizer finds you well.</p>
+    <button type="button" onclick="toggleForm()">Sort Me!</a>
+  </div>
+</div> */
