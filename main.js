@@ -64,9 +64,11 @@ const cards = () => {
 const houseForm = () => {
     const domString = `
     <div class="mb-3"> 
-        <label for="formHeader" class="form-label">Enter First Year's Name</label>
+        <label for="formHeader" onsumbmit="return validation();" class="form-label">Enter First Year's Name</label>
             <input type="text" class="form-control" id="studentName" placeholder="Student Name">
-        <button type="button" id="formButton" class="btn btn-primary">Submit</button>
+        <button type="button"  id="formButton" class="btn btn-primary">Sort it Up!</button>
+      <div id ="errors">
+      </div>    
     </div>
     `;
 
@@ -86,6 +88,14 @@ const handleFormSubmit = (event) => {
       studentBuilder(student);
       
 };
+
+const validation = () => { 
+  if (document.houseForm.username.value == "") {
+    document.getElementById('errors').innerHTML="*Please enter a username*";
+    return false;
+};
+};
+
 
 const expelStudent = (event) => {
     
@@ -107,7 +117,7 @@ const expelStudent = (event) => {
           <h5 class="card-title">${object.name}</h5>
           <p class="card-text">${object.house}</p>
             </div>
-          <button type="button" id=${i} class="btn btn-primary">Delete</button>
+          <button type="button" id=${i} class="btn btn-primary">Expel</button>
         </div>
       </div>
       `
@@ -117,23 +127,32 @@ const expelStudent = (event) => {
     renderToDom("#studentCard", domString);
 
 };
-  /* const expelledStudentBuilder = (piesArray) => {
-    let domString = "";
-    piesArray.forEach((pie, i) => {
-      domString += `
-      <div class="card" style="width: 100rem;">
-        <img src="${pie.imageUrl}" class="card-img-top" alt="${pie.name}">
-        <div class="card-body">
-          <h5 class="card-title">${pie.name}</h5>
-          <p class="card-text">${pie.ingredients}</p>
-          <button type="button" id=${i} class="btn btn-primary">Delete</button>
-        </div>
-      </div>
-      `;
-    });
-  
-    renderToDom("#expelledCard", domString);
-  }; */
+
+/* const expelBuilder = (array) => {
+  let domString = "";  
+    domString += `
+    <div class="card" style="width: 20rem;">
+      <div class="card-body">
+        <h5 class="card-title">${object.name}</h5>
+        <p class="card-text">${object.house}</p>
+          </div>
+    </div>
+    `
+    renderToDom("#expelCard", domString);
+  };
+   */
+
+
+const hadleExpelSubmit = (event) => {
+  event.preventDefault();
+    const expelledStudent = {
+        name: document.querySelector("#studentName").value,
+        house: randomHouse.hName,
+        expelled: true,
+      };
+      student.push(newStudent);
+      studentBuilder(student);
+};
 
 
 
@@ -151,8 +170,8 @@ const expelStudent = (event) => {
 
 
 /* const buttonEvents = () => {
-    document.querySelector("#headerCard");
-    document.addEventListener("click", handleButtonClick);
+  const expel = document.querySelector("button");
+  expel.addEventListener("click", handleFormSubmit);
 }; */
 
 
@@ -161,7 +180,7 @@ const expelStudent = (event) => {
 
 const init = () => {
     cards();
-    /* toggleForm(); */
+    /* buttonEvents(); */
     /* houseForm(); */
 };
 
