@@ -10,7 +10,7 @@ $ cd sorting-hat
 The User :
 - The users would be for harry poter fans who would like to spice their lives up with a personal sorting hats application.
 - User can enter any name they choose and it will automatically randomimze a house for them.
--users can also expel the student to Voldemort's army if they so desire.
+- Users can also expel the student to Voldemort's army if they so desire.
 
 The Features :
 
@@ -55,7 +55,7 @@ const handleFormSubmit = (event) => {
 };
 
 
-ScreenShits : 
+ScreenShots : 
 
 https://prnt.sc/1qcu3zs
 
