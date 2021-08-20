@@ -130,6 +130,7 @@ const expelStudent = (event) => {
   if(targetType === "button"){
     vmArmy.push(student.splice(targetId, 1)[0]);
     expelBuilder(vmArmy);
+    studentBuilder(student);
   };
       
 };
