@@ -25,7 +25,12 @@ const house = [
 },
 ];
 
-const randomHouse = house[Math.floor(Math.random() * house.length)];
+const sortedHouses = () => {
+  const rHouse =
+  house[Math.floor(Math.random() * house.length)];
+
+  return rHouse;
+};
 
 const student = [];
 
@@ -73,10 +78,11 @@ const handleFormSubmit = (event) => {
   event.preventDefault();
   if (document.querySelector("#studentName").value == "") {
       document.getElementById('errors').innerHTML="*Please enter a username*";
-  } else { 
+  } else {
+    const { hName } =  sortedHouses();
     const newStudent = {
         name: document.querySelector("#studentName").value,
-        house: randomHouse.hName,
+        house: hName,
       };
       student.push(newStudent);
       studentBuilder(student);
@@ -97,11 +103,24 @@ const handleFormSubmit = (event) => {
           </div>
         </div>
         `
+    });
+
       renderToDom("#studentCard", domString);
-      const expel = document.querySelector("#expelButton");
-      expel.addEventListener("click", expelStudent);
-}
-)};
+  };
+  const expelBuilder = (array) => {
+    let domString = "";
+    array.forEach((object) => {  
+      domString += `
+      <div class="card" style="width: 20rem;">
+        <div class="card-body">
+          <h5 class="card-title">${object.name}</h5>
+            </div>
+      </div>
+      `;
+    })
+      renderToDom("#expelCard", domString);
+      
+    };
 
 const expelStudent = (event) => {
     
@@ -109,70 +128,22 @@ const expelStudent = (event) => {
   const targetType = event.target.type;
 
   if(targetType === "button"){
-    vmArmy.push(students.splice(targetId, 1)[0]);
+    vmArmy.push(student.splice(targetId, 1)[0]);
     expelBuilder(vmArmy);
-    console.log(vmArmy);
-  }; 
+  };
+      
 };
-const expelBuilder = (array) => {
-  let domString = "";
-  array.forEach((object) => {  
-    domString += `
-    <div class="card" style="width: 20rem;">
-      <div class="card-body">
-        <h5 class="card-title">${object.name}</h5>
-          </div>
-    </div>
-    `;
-    renderToDom("#expelCard", domString);
-    
-  }
-  )};
 
-/* const hadleExpelSubmit = (event) => {
-  event.preventDefault();
-    
-      const form = document.querySelector("#formButton");
-      form.addEventListener("click", handleFormSubmit);
-}; */
+
+const handleClicks = () => {
+  document
+  .querySelector("#studentCard")
+  .addEventListener("click", expelStudent);
+};
 
 const init = () => {
     cards();
-    /* buttonEvents(); */
-    /* houseForm(); */
-};
+    handleClicks();
+ };
 
 init();
-
-/* const handleFormSubmit = (event) => {
-    event.preventDefault();
-    const newStudent = {
-        name: document.querySelector("#studentName").value,
-        house: randomHouse.hName,
-        expelled: false,
-      };
-      student.push(newStudent);
-      studentBuilder(student);
-      
-}; */
-
-/* const expelBuilder = (array) => {
-  let domString = "";  
-    domString += `
-    <div class="card" style="width: 20rem;">
-      <div class="card-body">
-        <h5 class="card-title">${object.name}</h5>
-        <p class="card-text">${object.house}</p>
-          </div>
-    </div>
-    `;
-    renderToDom("#expelCard", domString);
-  }; */
-  
-/* <div class="headerCard" style="width: 80rem;">
-        <div class="card-body">
-            <h5 class="card-title">Welcome to Harry P world</h5>
-        <p class="card-text">Never read Harry P I hope this house organizer finds you well.</p>
-    <button type="button" onclick="toggleForm()">Sort Me!</a>
-  </div>
-</div> */
